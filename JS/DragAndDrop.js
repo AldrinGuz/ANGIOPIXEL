@@ -3,16 +3,12 @@ const dragText = dropArea.querySelector("p");
 const button = dropArea.querySelector("button");
 const input = dropArea.querySelector("#input-img");
 let files;
-let idG=0;
 
 button.addEventListener("click", (e) => {input.click();});
 
 input.addEventListener("change", (e)=>{
     files = this.files;
     dropArea.classList.add("active");
-    idG=idG+1;
-    localStorage.setItem("files"+idG,JSON.stringify(files));
-    console.log(localStorage.getItem("files"+idG));
     showFiles(files);
     dropArea.classList.remove("active");
 });
