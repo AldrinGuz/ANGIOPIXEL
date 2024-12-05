@@ -37,6 +37,12 @@ modelo = tf.keras.models.load_model('modelo_cnn.h5')
 
 # Realizar predicción
 prediccion = modelo.predict(datos_entrada)
+redondeo_prediccion = round(prediccion[0][0],2)
+if(redondeo_prediccion>=0.5):
+    print("Lesión")
+else:
+    print("No lesión")
+
 
 # Mostrar el resultado de la predicción
-print("Predicción del modelo:", prediccion)
+print("Predicción del modelo:", redondeo_prediccion)

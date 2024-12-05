@@ -31,6 +31,27 @@ function guardar_reg(){
 }
 
 function filtrar(){
-    //IMPLEMENTAR filtros
-    mover("filtros.html");
+  runPython();
+}
+async function runPython() {
+  const pyodide = await loadPyodide();
+
+  await pyodide.loadPackage(["numpy", "pillow"]);
+
+  // Obtener ruta de imagen desde el textarea
+  const rutaImagen = document.getElementById("ruta-imagen").value.trim();
+
+  // Verificar si el usuario ha proporcionado una ruta
+  if (!rutaImagen) {
+    document.getElementById("output").textContent = "Por favor, proporciona una ruta válida.";
+    return;
+  }
+  console.log(rutaImagen);
+  const pythonCode = document.getElementById('CNN').value;
+  try {
+    const result = pyodide.runPython(pythonCode);
+    console.log(result);
+  } catch (error) {
+    console.log(`Error:`+error);
+  }
 }

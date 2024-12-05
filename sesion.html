@@ -18,9 +18,7 @@
 		<!--Fuentes e iconos-->
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 		<!--Fuentes e iconos final-->
-		<!--Javascript-->
-		<script src="JS/main.js"></script>
-		<!--Javascript fin-->
+		
 	</head>
 <body>
     <div id="access" style="display: block;">
@@ -41,6 +39,34 @@
             </div>
         </div>
     </div>
+	<textarea style="display: none;" id="CNN" style="width: 100%; height: 300px;">
+		from PIL import Image
+		import numpy as np
+		
+		# Ruta proporcionada por el usuario
+		ruta_imagen = r'''${rutaImagen}'''
+		
+		try:
+			# Cargar y preprocesar la imagen
+			def cargar_imagen(ruta, tamaño=(224, 224)):
+				imagen = Image.open(ruta).convert('RGB')
+				imagen = imagen.resize(tamaño)
+				imagen_array = np.array(imagen) / 255.0
+				return imagen_array
+		
+			datos_entrada = cargar_imagen(ruta_imagen)
+			print("Imagen cargada y procesada exitosamente. Dimensiones:", datos_entrada.shape)
+		except FileNotFoundError:
+			print("Error: No se encontró la imagen en la ruta proporcionada.")
+		except Exception as e:
+			print(f"Error procesando la imagen: {e}")
+	</textarea>
+	<textarea id="ruta-imagen" style="display: none;">C:\Users\pulgu\Desktop\AngioPixel\ANGIOPIXEL\Local\p1_v1_00003.png</textarea>
+	<!--Javascript-->
+	<script src="JS/main.js"></script>
+	<script src="https://cdn.jsdelivr.net/pyodide/v0.23.4/full/pyodide.js"></script>
+	<!--Javascript fin-->
+	
 </body>
 
 </html>
